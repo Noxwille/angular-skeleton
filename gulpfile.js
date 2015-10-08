@@ -9,7 +9,12 @@ require('./gulp_tasks/server');
 require('./gulp_tasks/browser-sync');
 require('./gulp_tasks/sass');
 
-gulp.task('default', ['clean'], function () {
+gulp.task('default', ['clean'], defaultTaskHandler);
+
+gulp.task('build', ['clean'], buildTaskHandler);
+
+
+function defaultTaskHandler () {
     gulp.start(
         'copy',
         'html',
@@ -24,12 +29,12 @@ gulp.task('default', ['clean'], function () {
         'watch-copy',
         'watch-sass'
     );
-});
+}
 
-gulp.task('build', ['clean'], function () {
+function buildTaskHandler () {
     gulp.start(
         'copy',
         'sass',
         'script:mini',
         'html:mini');
-});
+}

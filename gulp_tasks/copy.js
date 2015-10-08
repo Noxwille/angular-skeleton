@@ -4,22 +4,31 @@ var gulp    = require('gulp'),
     plumber = require('gulp-plumber'),
     CONFIG  = require('../config');
 
-gulp.task('copy', ['clean-copy'], function () {
-    return gulp.src(CONFIG.copy.src, {
-        base: CONFIG.work
-    })
+gulp.task('copy', ['clean-copy'], copyTaskHandler);
+
+gulp.task('watch-copy', watchCopyTaskHandler);
+
+gulp.task('clean-copy', cleanCopyTaskHandler);
+
+
+function copyTaskHandler () {
+    return gulp.src(CONFIG.copy.src,
+        {
+            base: CONFIG.work
+        })
         .pipe(plumber())
         .pipe(gulp.dest(CONFIG.build));
-});
+}
 
-gulp.task('watch-copy', function () {
-    watch(CONFIG.copy.src, {
-        base: CONFIG.work
-    }, function () {
-        gulp.start('copy');
-    });
-});
+function watchCopyTaskHandler () {
+    watch(CONFIG.copy.src,
+        {
+            base: CONFIG.work
+        }, function () {
+            gulp.start('copy');
+        });
+}
 
-gulp.task('clean-copy', function ( cb ) {
+function cleanCopyTaskHandler (cb) {
     del(CONFIG.copy.dest, cb);
-});
+}

@@ -5,8 +5,16 @@ var gulp        = require('gulp'),
     CONFIG      = require('../config'),
     browserSync = require("browser-sync").create();
 
-gulp.task('script', function () {
-    return gulp.src(CONFIG.script.src, {
+gulp.task('script', scriptTaskHandler);
+
+gulp.task('watch-script', ['script', 'browser-sync'], watchScriptTaskHandler);
+
+gulp.task('script:mini', scriptMiniTaskHandler);
+
+
+function scriptTaskHandler () {
+    return gulp.src(CONFIG.script.src,
+        {
             base: CONFIG.work
         })
         .pipe(plumber())
@@ -14,13 +22,13 @@ gulp.task('script', function () {
         .pipe(sourcemaps.write())
         .pipe(gulp.dest(CONFIG.script.dest))
         .pipe(browserSync.reload({stream:true}));
-});
+}
 
-gulp.task('watch-script', ['script', 'browser-sync'], function () {
-  gulp.watch(CONFIG.script.src, ['script']);
-});
+function watchScriptTaskHandler () {
+    gulp.watch(CONFIG.script.src, ['script']);
+}
 
-gulp.task('script:mini', function () {
+function scriptMiniTaskHandler () {
     var requirejs = require('requirejs');
 
     return requirejs.optimize({
@@ -36,4 +44,4 @@ gulp.task('script:mini', function () {
         preserveLicenseComments: false,
         useStrict:               true
     });
-});
+}

@@ -8,7 +8,14 @@ var gulp          = require('gulp'),
     CONFIG        = require('../config'),
     browserSync   = require("browser-sync").create();
 
-gulp.task('html', ['index-html'], function () {
+gulp.task('html', ['index-html'], htmlTaskHandler);
+
+gulp.task('index-html', indexHtmlTaskHandler);
+
+gulp.task('watch-html', watchHtmlTaskHandler);
+
+
+function htmlTaskHandler () {
     return gulp.src(CONFIG.html.src)
         .pipe(plumber())
         .pipe(rename(function ( path ) {
@@ -26,9 +33,9 @@ gulp.task('html', ['index-html'], function () {
         }))
         .pipe(gulp.dest(CONFIG.html.dest))
         .pipe(browserSync.reload({stream:true}));
-});
+}
 
-gulp.task('index-html', function () {
+function indexHtmlTaskHandler () {
     return gulp.src('./client/index.html')
         .pipe(plumber())
         .pipe(preprocess({
@@ -37,10 +44,10 @@ gulp.task('index-html', function () {
             }
         }))
         .pipe(gulp.dest(CONFIG.build));
-});
+}
 
-gulp.task('watch-html', function () {
+function watchHtmlTaskHandler () {
     watch([CONFIG.html.src, './client/index.html'], function () {
         gulp.start('html')
     });
-});
+}

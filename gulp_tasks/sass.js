@@ -6,7 +6,12 @@ var gulp        = require('gulp'),
     browserSync = require('browser-sync'),
     reload      = browserSync.reload;
 
-gulp.task('sass', function () {
+gulp.task('sass', sassTaskHandler);
+
+gulp.task('watch-sass', ['sass', 'browser-sync'], watchSassTaskHandler);
+
+
+function sassTaskHandler () {
     return gulp.src(CONFIG.sass.src)
         .pipe(plumber())
         .pipe(sourcemaps.init())
@@ -16,8 +21,8 @@ gulp.task('sass', function () {
         .pipe(sourcemaps.write())
         .pipe(gulp.dest(CONFIG.sass.dest))
         .pipe(reload({stream:true}));
-});
+}
 
-gulp.task('watch-sass', ['sass', 'browser-sync'], function () {
+function watchSassTaskHandler () {
     gulp.watch(CONFIG.sass.src, ['sass']);
-});
+}

@@ -8,6 +8,9 @@ var config = {
 };
 
 // browser-sync task for starting the server.
-gulp.task('browser-sync', function() {
+gulp.task('browser-sync', browserSyncTaskHandler);
+
+
+function browserSyncTaskHandler () {
     browserSync(config)
-});
+}

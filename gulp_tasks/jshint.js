@@ -9,15 +9,20 @@ var hintPath = [
     '!./client/scripts/vendors/**/*'
 ];
 
-gulp.task('jshint', function() {
+gulp.task('jshint', jshintTaskHandler);
+
+gulp.task('watch-jshint', watchJshintTaskHandler);
+
+
+function jshintTaskHandler () {
     return gulp.src(hintPath)
         .pipe(plumber())
         .pipe(jshint())
         .pipe(jscs())
         .pipe(stylish())
         .pipe(stylish.combineWithHintResults());
-});
+}
 
-gulp.task('watch-jshint', function() {
+function watchJshintTaskHandler () {
     gulp.watch(hintPath, ['jshint']);
-});
+}
