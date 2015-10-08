@@ -1,24 +1,35 @@
-/**
- * Created by smy on 5/16/2014.
- */
 define(function () {
-    "use strict";
-    return ['$rootScope', '$state', '$stateParams',
-        function ( $rootScope, $state, $stateParams) {
+    'use strict';
 
-            var goTo404 = function () {
+    return events;
 
-            };
+    events.$inject = ['$rootScope', '$state', '$stateParams', '$log'];
 
-            $rootScope.$on('$stateChangeStart', function () {});
-            $rootScope.$on('$stateChangeSuccess', function () {});
-            $rootScope.$on('$stateChangeError', goTo404);
-            $rootScope.$on('$stateNotFound', goTo404);
+    function events ($rootScope, $state, $stateParams, $log) {
+        $rootScope.$on('$stateChangeStart', changeState);
+        $rootScope.$on('$stateChangeSuccess', changeStateSuccess);
+        $rootScope.$on('$stateChangeError', goTo404);
+        $rootScope.$on('$stateNotFound', goTo404);
 
-            // For use $state in views
-            $rootScope.$state = $state;
-            $rootScope.$stateParams = $stateParams;
+        // For use $state in views
+        $rootScope.$state = $state;
+        $rootScope.$stateParams = $stateParams;
+
+        function changeState () {
 
         }
-    ];
+
+        function changeStateSuccess () {
+
+        }
+
+        function goTo404 (event, current, previous, rejection) {
+            var destination = (current && (current.title || current.name || current.loadedTemplateUrl))
+                || 'unknown target';
+
+            var msg = 'Error routing to ' + destination + '. ' + (rejection.msg || '');
+
+            $log.warning(msg, [current]);
+        }
+    }
 });

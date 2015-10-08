@@ -1,4 +1,5 @@
 require.config({
+    urlArgs: "bust=" + (new Date()).getTime(),
     baseUrl: "./scripts/app",
     paths: {
         'angular':          '../vendors/angular/angular.min',
@@ -9,30 +10,26 @@ require.config({
         'jquery':           '../vendors/jquery/dist/jquery',
         'App':              'app'
     },
-    priority: [
-        'jquery', 'angular'
-    ],
     shim: {
-        'angular': {
-            exports: 'angular',
-            deps: ['jquery']
+        'angular'          : {
+            exports: 'angular'
         },
-        'angularRouter': ['angular'],
-        'angularResource': ['angular'],
-        'angularTemplates': ['angular'],
-        'jquery': {
+        'angularRouter'    : ['angular'],
+        'angularResource'  : ['angular'],
+        'angularTemplates' : ['angular'],
+        'jquery'           : {
             exports: 'jQuery'
         },
-        'App': ['angular', 'jquery']
+        'App'              : ['angular']
     },
     packages: [
         {
-            name:     'App.Main',
-            location: './modules/main'
+            name     : 'App.Main',
+            location : './modules/main'
         },
         {
-            name: 'App.MyModule',
-            location: './modules/my-module'
+            name     : 'App.MyModule',
+            location : './modules/my-module'
         }
     ],
     deps: ['App']

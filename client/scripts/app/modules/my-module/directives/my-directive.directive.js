@@ -1,31 +1,27 @@
-/**
- * @ngdoc directive
- * @name App.Main:<my-directive>
- *
- * @restrict E
- *
- * @description
- *
- * @param {string} md-count
- *
- * @example
- * <pre>
- * <my-directive md-count="5"></my-directive>
- * </pre>
- */
-
 define(function () {
-    "use strict";
-    return [function () {
-        return {
-            restrict: "E",
-            scope: {
-                count: '@mdCount'
-            },
-            templateUrl: 'templates/app/main/my-directive.tmpl.html',
-            link: function ( $scope, element, attrs, ctrl ) {
+    'use strict';
 
-            }
+    return myDirective;
+
+    function myDirective () {
+        var directive = {
+            restrict: 'E',
+            transclude: true,
+            scope: {
+                title: '='
+            },
+            templateUrl: 'templates/app/my-module/my-directive.tmpl.html',
+            link: linkFn,
+            controller: 'MyControllerCtrl',
+            controllerAs: 'vm'
         };
-    }];
+
+        return directive;
+
+        function linkFn(scope, element, attrs, ctrl) {
+            console.log('LINK: scope.title = ', scope.title);
+            console.log('LINK: scope.vm.title = ', scope.vm.title);
+            console.log('LINK: scope.vm.body = ', scope.vm.body);
+        }
+    }
 });

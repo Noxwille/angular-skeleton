@@ -1,26 +1,23 @@
-/**
- * @ngdoc Service
- * @name CommonService
- * @memberOf <App.Services>
- * @author Nikolay Savenko <biosis@gmail.com>
- * @description This is a common service.
- */
-
 define(function () {
-    "use strict";
-    return ['commonRepository',
-        function (commonRepository) {
+    'use strict';
 
-            return {
+    return commonService;
 
-                /**
-                 * Get list.
-                 * @returns {$promise|*}
-                 */
-                getMyList: function () {
-                    return commonRepository.getMyList().$promise;
-                }
-            };
+    commonService.$inject = ['commonRepository'];
+
+    function commonService (commonRepository) {
+        var common = {
+            /**
+             * Get list.
+             * @returns {$promise|*}
+             */
+            getMyList: getMyList
+        };
+
+        return common;
+
+        function getMyList() {
+            return commonRepository.getMyList().$promise;
         }
-    ];
+    }
 });

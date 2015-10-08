@@ -1,8 +1,18 @@
-define(function(require, exports, module) {
-    "use strict";
+define(function (require, exports, module) {
+    'use strict';
 
-    var angular = require('angular'),
-        app;
+    var angular   = require('angular'),
+        // constants
+        constants = require('./configs/constants.constant'),
+        // config
+        exception = require('./configs/exception.config'),
+        events = require('./configs/events.config'),
+        // modules
+        Main = require('App.Main').name,
+        MyModule = require('App.MyModule').name,
+        // providers
+        locationProvider = require('./configs/locationProvider.config'),
+        stateProvider = require('./configs/stateProvider.config');
 
     /**
      * Loading Global Modules and Dependencies
@@ -14,39 +24,30 @@ define(function(require, exports, module) {
     /**
      * @module app
      */
-    app = angular.module('App', [
-
-        /**
-         * Require Vendor modules
-         */
+    angular.module('App', [
+        // Vendor modules
         'ui.router',
         'ngResource',
         'templates',
 
-        /**
-         * Require new Packages as Dependencies of the App Module
-         */
-        require('App.Main').name,
-        require('App.MyModule').name
+        // Custom modules
+        Main,
+        MyModule
     ]);
 
     /**
      * Configuring App Module
      */
-    app.constant("CONSTANTS", require('./configs/constants.config'))
-        .run(require('./configs/events.config'));
-
-    app.config(['$locationProvider', function($locationProvider) {
-        $locationProvider.html5Mode(true).hashPrefix(' ');
-    }]);
-
-    app.run(["$rootScope", "$state", function ($rootScope, $state) {
-        $rootScope.$state = $state; // state to be accessed from view
-    }]);
+    angular.module('App')
+        .constant('Constants', constants)
+        .config(locationProvider)
+        .config(exception)
+        .run(events)
+        .run(stateProvider);
 
     angular.element(document.documentElement).ready(function () {
-        angular.bootstrap(document, [app.name]);
+        angular.bootstrap(document, ['App']);
     });
 
-    module.exports = app;
+    module.exports = angular.module('App');
 });

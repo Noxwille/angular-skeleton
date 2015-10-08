@@ -1,7 +1,11 @@
 define(function () {
-    "use strict";
-    return ['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
+    'use strict';
 
+    return Router;
+
+    Router.$inject = ['$stateProvider', '$urlRouterProvider'];
+
+    function Router ($stateProvider, $urlRouterProvider) {
         $urlRouterProvider.otherwise("/my-route");
 
         /**
@@ -14,18 +18,21 @@ define(function () {
                 views: {
                     '': {
                         templateUrl: 'templates/app/main/main.tmpl.html',
-                        controller: 'MainCtrl'
+                        controller: 'MainCtrl',
+                        controllerAs: 'vm'
                     },
                     'header@main': {
                         templateUrl: 'templates/app/main/header.tmpl.html',
-                        controller: 'HeaderCtrl'
+                        controller: 'HeaderCtrl',
+                        controllerAs: 'vm'
                     },
                     'content@main': 'content',
                     'footer@main': {
                         templateUrl: 'templates/app/main/footer.tmpl.html',
-                        controller: 'FooterCtrl'
+                        controller: 'FooterCtrl',
+                        controllerAs: 'vm'
                     }
                 }
             });
-    }];
+    }
 });

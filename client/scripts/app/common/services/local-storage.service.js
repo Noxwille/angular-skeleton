@@ -1,52 +1,55 @@
-/**
- * @ngdoc Service
- * @name CommonService
- * @memberOf <App.Services>
- * @author Nikolay Savenko <smy@ciklum.com>
- * @description This is a common service.
- * @copyright 2014 Ciklum. All rights reserved.
- */
-
 define(function () {
-    "use strict";
-    return [function () {
+    'use strict';
 
+    return localStorageService;
+
+    function localStorageService () {
         var LS = window.localStorage;
-
-        return {
-
+        var storage = {
             /**
              *
              * @param headerName {string}
              */
-            get: function ( headerName ) {
-                return LS.getItem(headerName);
-            },
-
-            /**
-             *
-             * @param headerName {string}
-             */
-            clear: function ( headerName ) {
-                return LS.setItem(headerName, '');
-            },
+            get: getStorage,
 
             /**
              *
              * @param headerName
              * @param value
              */
-            set: function ( headerName, value ) {
-                return LS.setItem(headerName, value);
-            },
+            set: setStorage,
 
             /**
              *
              * @param headerName {string}
              */
-            has: function ( headerName ) {
-                return LS.getItem(headerName);
-            }
+            has: hasStorage,
+
+            /**
+             *
+             * @param headerName {string}
+             */
+            clear: clearStorage
         };
-    }];
+
+        return storage;
+
+        ///////////////////
+
+        function getStorage (headerName) {
+            return LS.getItem(headerName);
+        }
+
+        function setStorage (headerName, value) {
+            return LS.setItem(headerName, value);
+        }
+
+        function hasStorage (headerName) {
+            return LS.getItem(headerName);
+        }
+
+        function clearStorage (headerName) {
+            return LS.setItem(headerName, '');
+        }
+    }
 });

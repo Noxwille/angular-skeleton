@@ -10,10 +10,17 @@
  */
 
 define(function () {
-    "use strict";
-    return ['$resource', function ($resource) {
-        return $resource('', null, {
+    'use strict';
 
+    return commonRepository;
+
+    commonRepository.$inject = ['$resource'];
+
+    function commonRepository ($resource) {
+
+        return $resource('', null, endPoints);
+
+        var endPoints = {
             /**
              * This provides properties used for requests.
              * @prop {Object} getCauses - The values for getting list of the Causes.
@@ -58,6 +65,6 @@ define(function () {
                     'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
                 }
             }
-        });
-    }];
+        };
+    }
 });
