@@ -1,7 +1,6 @@
 var gulp        = require('gulp'),
     browserSync = require('browser-sync'),
-    reload      = browserSync.reload,
-    CONFIG     = require('../config');
+    CONFIG      = require('../config');
 
 var config = {
     files: CONFIG.build,

@@ -1,9 +1,8 @@
-var gulp       = require('gulp'),
-    watch      = require('gulp-watch'),
-    connect    = require('gulp-connect'),
-    sourcemaps = require('gulp-sourcemaps'),
-    plumber    = require('gulp-plumber'),
-    CONFIG     = require('../config'),
+var gulp        = require('gulp'),
+    watch       = require('gulp-watch'),
+    sourcemaps  = require('gulp-sourcemaps'),
+    plumber     = require('gulp-plumber'),
+    CONFIG      = require('../config'),
     browserSync = require("browser-sync").create();
 
 gulp.task('script', function () {

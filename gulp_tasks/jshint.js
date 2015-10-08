@@ -1,6 +1,6 @@
 var gulp    = require('gulp'),
     jshint  = require('gulp-jshint'),
-    jscs = require('gulp-jscs'),
+    jscs    = require('gulp-jscs'),
     plumber = require('gulp-plumber'),
     stylish = require('gulp-jscs-stylish');
 

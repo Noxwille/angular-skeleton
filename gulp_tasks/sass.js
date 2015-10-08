@@ -1,8 +1,8 @@
-var gulp       = require('gulp'),
-    sass       = require('gulp-sass'),
-    sourcemaps = require('gulp-sourcemaps'),
-    plumber    = require('gulp-plumber'),
-    CONFIG     = require('../config'),
+var gulp        = require('gulp'),
+    sass        = require('gulp-sass'),
+    sourcemaps  = require('gulp-sourcemaps'),
+    plumber     = require('gulp-plumber'),
+    CONFIG      = require('../config'),
     browserSync = require('browser-sync'),
     reload      = browserSync.reload;
 

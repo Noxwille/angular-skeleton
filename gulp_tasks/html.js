@@ -1,13 +1,12 @@
 var gulp          = require('gulp'),
     watch         = require('gulp-watch'),
-    connect       = require('gulp-connect'),
     rename        = require('gulp-rename'),
     templateCache = require('gulp-angular-templatecache'),
     preprocess    = require('gulp-preprocess'),
     minifyHtml    = require('gulp-minify-html'),
     plumber       = require('gulp-plumber'),
     CONFIG        = require('../config'),
-    browserSync = require("browser-sync").create();
+    browserSync   = require("browser-sync").create();
 
 gulp.task('html', ['index-html'], function () {
     return gulp.src(CONFIG.html.src)
