@@ -1,9 +1,13 @@
-var gulp   = require('gulp'),
-    del    = require('del'),
-    CONFIG = require('../config');
+'use strict';
 
-gulp.task('clean', cleanTaskHandler);
+var gulp = require('gulp'),
+    rm   = require('gulp-rimraf'),
+    $    = require('../config/gulpConfig');
 
-function cleanTaskHandler (cb) {
-    del(CONFIG.build, cb);
+gulp.task($.TASK.clean.name, cleaner);
+
+
+function cleaner () {
+    return gulp.src($.TASK.clean.src, { read: false })
+        .pipe(rm({ force: true }));
 }

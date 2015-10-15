@@ -1,15 +1,12 @@
+'use strict';
+
 var gulp    = require('gulp'),
     connect = require('gulp-connect'),
-    CONFIG  = require('../config');
+    $       = require('../config/gulpConfig');
 
-gulp.task('server', serverTaskHandler);
+gulp.task($.TASK.webServer.name, webServer);
 
 
-function serverTaskHandler () {
-    connect.server({
-        root:       CONFIG.build,
-        host:       CONFIG.server.host,
-        port:       CONFIG.server.port,
-        fallback:   CONFIG.server.fallback
-    });
+function webServer () {
+    connect.server($.CONFIG.webServer);
 }

@@ -1,16 +1,12 @@
+'use strict';
+
 var gulp        = require('gulp'),
     browserSync = require('browser-sync'),
-    CONFIG      = require('../config');
+    $           = require('../config/gulpConfig');
 
-var config = {
-    files: CONFIG.build,
-    proxy: CONFIG.server.host + ":" + CONFIG.server.port
-};
-
-// browser-sync task for starting the server.
-gulp.task('browser-sync', browserSyncTaskHandler);
+gulp.task($.TASK.browserSync.name, browserSyncHandler);
 
 
-function browserSyncTaskHandler () {
-    browserSync(config)
+function browserSyncHandler () {
+    browserSync($.CONFIG.browserSync);
 }

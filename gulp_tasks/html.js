@@ -1,53 +1,35 @@
+'use strict';
+
 var gulp          = require('gulp'),
-    watch         = require('gulp-watch'),
     rename        = require('gulp-rename'),
     templateCache = require('gulp-angular-templatecache'),
     preprocess    = require('gulp-preprocess'),
     minifyHtml    = require('gulp-minify-html'),
     plumber       = require('gulp-plumber'),
-    CONFIG        = require('../config'),
-    browserSync   = require("browser-sync").create();
+    browserSync   = require('browser-sync'),
+    $             = require('../config/gulpConfig');
 
-gulp.task('html', ['index-html'], htmlTaskHandler);
+gulp.task($.TASK.html.name, [$.TASK.indexHtml.name], buildHtml);
 
-gulp.task('index-html', indexHtmlTaskHandler);
-
-gulp.task('watch-html', watchHtmlTaskHandler);
+gulp.task($.TASK.indexHtml.name, buildIndexHtml);
 
 
-function htmlTaskHandler () {
-    return gulp.src(CONFIG.html.src)
+function buildHtml () {
+    return gulp.src($.TASK.html.src)
         .pipe(plumber())
         .pipe(rename(function ( path ) {
             path.dirname = path.dirname.replace(/(\\|\/)(modules|templates)/g, '');
             return path;
         }))
-        .pipe(minifyHtml({
-            empty:  true,
-            spare:  true,
-            quotes: true
-        }))
-        .pipe(templateCache({
-            standalone: true,
-            root:       'templates/'
-        }))
-        .pipe(gulp.dest(CONFIG.html.dest))
+        .pipe(minifyHtml($.CONFIG.html.minify))
+        .pipe(templateCache($.CONFIG.html.templateCache))
+        .pipe(gulp.dest($.TASK.html.dest))
         .pipe(browserSync.reload({stream:true}));
 }
 
-function indexHtmlTaskHandler () {
-    return gulp.src('./client/index.html')
+function buildIndexHtml () {
+    return gulp.src($.TASK.indexHtml.src)
         .pipe(plumber())
-        .pipe(preprocess({
-            context: {
-                isCompressed: false
-            }
-        }))
-        .pipe(gulp.dest(CONFIG.build));
-}
-
-function watchHtmlTaskHandler () {
-    watch([CONFIG.html.src, './client/index.html'], function () {
-        gulp.start('html')
-    });
+        .pipe(preprocess($.CONFIG.html.preprocess))
+        .pipe(gulp.dest($.TASK.indexHtml.dest));
 }
