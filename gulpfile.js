@@ -1,6 +1,6 @@
 var gulp  = require('gulp'),
     watch = require('gulp-watch'),
-    $     = require('./config/gulpConfig');
+    $     = require('./config/gulp.conf');
 
 require('./gulp_tasks/html');
 require('./gulp_tasks/styles');

@@ -1,7 +1,7 @@
 var gulp        = require('gulp'),
     plumber     = require('gulp-plumber'),
     browserSync = require('browser-sync'),
-    $           = require('../config/gulpConfig');
+    $           = require('../config/gulp.conf');
 
 gulp.task($.TASK.fonts.name, buildFonts);
 

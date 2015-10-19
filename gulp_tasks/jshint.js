@@ -5,7 +5,7 @@ var gulp    = require('gulp'),
     jscs    = require('gulp-jscs'),
     plumber = require('gulp-plumber'),
     stylish = require('gulp-jscs-stylish'),
-    $       = require('../config/gulpConfig');
+    $       = require('../config/gulp.conf');
 
 gulp.task('jshint', jshintHandler);
 

@@ -7,7 +7,7 @@ var gulp        = require('gulp'),
     cssmin      = require('gulp-minify-css'),
     prefixer    = require('gulp-autoprefixer'),
     browserSync = require('browser-sync'),
-    $           = require('../config/gulpConfig');
+    $           = require('../config/gulp.conf');
 
 gulp.task($.TASK.styles.name, buildStyles);
 

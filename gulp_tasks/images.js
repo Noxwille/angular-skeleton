@@ -5,7 +5,7 @@ var gulp        = require('gulp'),
     imagemin    = require('gulp-imagemin'),
     pngquant    = require('imagemin-pngquant'),
     browserSync = require('browser-sync'),
-    $           = require('../config/gulpConfig');
+    $           = require('../config/gulp.conf');
 
 $.CONFIG.images.minify.use = [pngquant()];
 

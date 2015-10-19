@@ -5,7 +5,7 @@ var gulp        = require('gulp'),
     sourcemaps  = require('gulp-sourcemaps'),
     requirejs   = require('requirejs'),
     browserSync = require('browser-sync'),
-    $           = require('../config/gulpConfig');
+    $           = require('../config/gulp.conf');
 
 gulp.task($.TASK.scripts.name, buildScripts);
 

@@ -2,7 +2,7 @@
 
 var gulp        = require('gulp'),
     browserSync = require('browser-sync'),
-    $           = require('../config/gulpConfig');
+    $           = require('../config/gulp.conf');
 
 gulp.task($.TASK.browserSync.name, browserSyncHandler);
 

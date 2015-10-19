@@ -2,7 +2,7 @@
 
 var gulp = require('gulp'),
     rm   = require('gulp-rimraf'),
-    $    = require('../config/gulpConfig');
+    $    = require('../config/gulp.conf');
 
 gulp.task($.TASK.clean.name, cleaner);
 

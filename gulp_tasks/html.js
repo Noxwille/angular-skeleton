@@ -7,7 +7,7 @@ var gulp          = require('gulp'),
     minifyHtml    = require('gulp-minify-html'),
     plumber       = require('gulp-plumber'),
     browserSync   = require('browser-sync'),
-    $             = require('../config/gulpConfig');
+    $             = require('../config/gulp.conf');
 
 gulp.task($.TASK.html.name, [$.TASK.indexHtml.name], buildHtml);
 

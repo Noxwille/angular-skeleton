@@ -2,7 +2,7 @@
 
 var gulp    = require('gulp'),
     connect = require('gulp-connect'),
-    $       = require('../config/gulpConfig');
+    $       = require('../config/gulp.conf');
 
 gulp.task($.TASK.webServer.name, webServer);
 
